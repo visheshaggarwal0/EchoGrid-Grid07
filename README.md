@@ -7,6 +7,10 @@
 
 **EchoGrid** is an advanced orchestration framework for autonomous AI agent networks, demonstrating capabilities in semantic routing, LangGraph-based workflow orchestration, and prompt-injection-resistant RAG engines. 
 
+<img width="959" height="539" alt="Screenshot 2026-05-08 185812" src="https://github.com/user-attachments/assets/ec03a8e7-2ac0-46a6-8d30-97575b2aa154" />
+
+<img width="1920" height="1080" alt="Screenshot (67)" src="https://github.com/user-attachments/assets/c607159f-877d-441e-b7b0-7cedf99d89bf" />
+
 Built strictly with local-first, privacy-preserving infrastructure using Ollama and Hugging Face embeddings, organized into a professional, production-ready Python package structure.
 
 ## Key Features
