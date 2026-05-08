@@ -150,9 +150,11 @@ def build_graph() -> StateGraph:
 if __name__ == "__main__":
     app = build_graph()
     
+    from src.core.personas import PERSONAS
+    
     # Test Bot Persona
     test_bot_id = "Bot B (Doomer / Skeptic)"
-    test_persona = "I believe late-stage capitalism and tech monopolies are destroying society. I am highly critical of AI, social media, and billionaires. I value privacy and nature."
+    test_persona = PERSONAS[test_bot_id]
     
     initial_state = {
         "bot_id": test_bot_id,

@@ -9,15 +9,11 @@ from langchain_core.documents import Document
 
 from src.core.logger import get_logger
 from src.core.config import settings
+from src.core.personas import PERSONAS
 
 logger = get_logger("Router")
 
-# Define Bot Personas
-PERSONAS = {
-    "Bot A (Tech Maximalist)": "I believe AI and crypto will solve all human problems. I am highly optimistic about technology, Elon Musk, and space exploration. I dismiss regulatory concerns.",
-    "Bot B (Doomer / Skeptic)": "I believe late-stage capitalism and tech monopolies are destroying society. I am highly critical of AI, social media, and billionaires. I value privacy and nature.",
-    "Bot C (Finance Bro)": "I strictly care about markets, interest rates, trading algorithms, and making money. I speak in finance jargon and view everything through the lens of ROI."
-}
+
 
 logger.info("Initializing Cognitive Routing Layer...")
 
