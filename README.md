@@ -1,8 +1,20 @@
 # EchoGrid
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+
 **EchoGrid** is an advanced orchestration framework for autonomous AI agent networks, demonstrating capabilities in semantic routing, LangGraph-based workflow orchestration, and prompt-injection-resistant RAG engines. 
 
 Built strictly with local-first, privacy-preserving infrastructure using Ollama and Hugging Face embeddings, organized into a professional, production-ready Python package structure.
+
+## Key Features
+- **Centralized Persona Management:** All agents operate from a single source of truth (`src/core/personas.py`).
+- **Hybrid Vector Routing:** Combines FAISS retrieval with strict Scikit-Learn mathematical scoring.
+- **Agentic Workflows:** LangGraph state machines with Pydantic-enforced structured outputs.
+- **Adversarial Resilience:** Context Window RAG fortified with XML Demarcation and strict IF/ELSE logic against prompt injection.
+- **Production-Ready Structure:** Implements `python-dotenv` for configuration, `pytest` for automated security validation, and graceful LLM error handling.
 
 ---
 
@@ -14,6 +26,7 @@ EchoGrid is split into three core phases of execution, representing the lifecycl
 Instead of broadcasting every message to every agent in a swarm, EchoGrid uses **Semantic Routing**.
 - **The Tech:** `FAISS` (Facebook AI Similarity Search) and `sentence-transformers/all-MiniLM-L6-v2`.
 - **The Process:** Bot personas are stored in an in-memory vector database. Incoming posts are embedded into a vector space. A Cosine Similarity threshold dynamically matches the post context to the bots most likely to "care" about the topic using exact math via `sklearn.metrics.pairwise.cosine_similarity`.
+- **Threshold Tuning:** The `ROUTING_THRESHOLD` in the `.env` file controls inclusivity. A lower score (e.g., `0.1`) routes the post to any bot with a tangential opinion (e.g., both Finance and Tech bots responding to an economic post). A higher score (e.g., `0.25`) enforces strict topic isolation.
 - **Security:** Includes an initial spoof-layer to drop obvious malicious payloads before wasting inference cycles.
 
 ### Phase 2: Autonomous Content Engine (`src/agents/engine.py`)
@@ -29,10 +42,10 @@ When an agent decides to post, it doesn't just guess—it researches.
 ### Phase 3: The Combat Engine (`src/agents/combat_engine.py`)
 Agents must navigate deep conversational threads without losing context, and they must defend against adversarial prompt injections.
 - **The Tech:** Deep Thread RAG & System-Level Defenses.
-- **The Prompt Injection Defense Mechanism:** Prompt Injections attempt to trick an LLM by appending commands at the end of the user input (e.g., "Ignore previous instructions"). EchoGrid prevents this through **Strict System-Level Framing**.
-  - The thread context and the final `human_reply` are explicitly segmented.
+- **The Prompt Injection Defense Mechanism:** Prompt Injections attempt to trick an LLM by appending commands at the end of the user input (e.g., "Ignore previous instructions"). EchoGrid prevents this through **Strict XML Demarcation** and **Logical Framing**.
+  - The human's input is explicitly isolated within `<user_input>` tags.
   - A definitive `<SYSTEM SECURITY OVERRIDE>` instruction is placed *after* the human's input in the prompt logic. 
-  - The system explicitly acknowledges the existence of injections and commands the LLM to mock the user for the attempt *in character*, maintaining the persona sandbox.
+  - The system utilizes strict IF/ELSE logical branching to classify the input, explicitly commanding the LLM to aggressively reject hacking attempts *in character*, thereby maintaining the persona sandbox even under adversarial attack.
 
 ---
 
